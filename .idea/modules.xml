@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
@@ -5,4 +6,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/3.2-crud.iml" filepath="$PROJECT_DIR$/.idea/3.2-crud.iml" />
     </modules>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/3.2-crud.iml" filepath="$PROJECT_DIR$/.idea/3.2-crud.iml" />
+    </modules>
+  </component>
+>>>>>>> 30042147070ca8ae1b7d65d33bf2440b6229a2b8
 </project>
