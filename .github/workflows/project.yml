@@ -6,7 +6,7 @@ on:
 
 jobs:
   testing:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
@@ -40,7 +40,7 @@ jobs:
       - name: Python install
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
 
       - name: Establish connection
         run: pip install -r requirements.txt
