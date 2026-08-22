@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Django settings for stocks_products project.
 
@@ -144,7 +144,6 @@ REST_FRAMEWORK = {
 }
 
 
-=======
 """
 Django settings for stocks_products project.
 
@@ -288,6 +287,3 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ]
 }
-
-
->>>>>>> 30042147070ca8ae1b7d65d33bf2440b6229a2b8

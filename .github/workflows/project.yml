@@ -1,0 +1,62 @@
+name: Testing and deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  testing:
+    runs-on: ubuntu-26.04
+    env:
+      SECRET_KEY: ${{ secret.SECRET_KEY }}
+      DEBUG: ${{ secret.DEBUG }}
+      ALLOWED_HOSTS: ${{ secret.ALLOWED_HOSTS }}
+      DB_ENGINE: ${{ secret.DB_ENGINE }}
+      DB_HOST: ${{ secret.DB_HOST }}
+      DB_NAME: ${{ secret.DB_NAME }}
+      DB_PASSWORD: ${{ secret.DB_PASSWORD }}
+      DB_PORT: ${{ secret.DB_PORT }}
+      DB_USER: ${{ secret.DB_USER }}
+
+    services:
+      postgresql_main:
+        image: postgres:12
+        env:
+          POSTGRES_DB: ${{ env.DB_NAME }}
+          POSTGRES_USER: ${{ env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Updates check
+        uses: actions/checkout@v4
+
+      - name: Python install
+        uses: actions/setup-python@v4
+        with:
+          - python-version: 3.10
+
+      - name: Establish connection
+        run: pip install -r requirements.txt
+
+      - name: Linting
+        run: flake8 logistic/ --exclude=logistic/migrations/
+
+      - name: Testing
+        run: python manage.py test
+        env:
+          SECRET_KEY: ${{ secret.SECRET_KEY }}
+          DEBUG: ${{ secret.DEBUG }}
+          ALLOWED_HOSTS: ${{ secret.ALLOWED_HOSTS }}
+          DB_ENGINE: ${{ secret.DB_ENGINE }}
+          DB_HOST: ${{ secret.DB_HOST }}
+          DB_NAME: ${{ secret.DB_NAME }}
+          DB_PASSWORD: ${{ secret.DB_PASSWORD }}
+          DB_PORT: ${{ secret.DB_PORT }}
+          DB_USER: ${{ secret.DB_USER }}
